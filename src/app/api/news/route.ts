@@ -1,6 +1,6 @@
 import dbConnect from "@/lib/dbConnect";
 
-export async function GET(req: Request) {
+export async function GET() {
   try {
     const db = await dbConnect();
     const collection = db.collection("news");

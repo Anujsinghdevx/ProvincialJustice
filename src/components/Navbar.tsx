@@ -1,37 +1,39 @@
 import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const Navbar = () => {
   return (   
       <nav className="block w-full text-white bg-black shadow-md lg:px-8">
         <div className="container flex flex-wrap items-center justify-between mx-auto text-gray-100">
-          <a
+          <Link
             href="/"
             className="block cursor-pointer text-base text-gray-200 font-semibold"
           >
-            <img src="logo.png" width={100} alt="Logo" />
-          </a>
+            <Image src="/logo.png" height={90} width={90} alt="Logo" />
+          </Link>
 
           <div className="hidden lg:block">
             <ul className="flex gap-8 mt-2 mb-4 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
               <li className="flex items-center p-1 text-sm text-gray-200">
-                <a href="/" className="flex items-center text-xl hover:text-2xl transition-all">
+                <Link href="/" className="flex items-center text-xl hover:text-2xl transition-all">
                   Home
-                </a>
+                </Link>
               </li>
               <li className="flex items-center p-1 text-sm text-gray-200">
-                <a href="about" className="flex items-center text-xl hover:text-2xl transition-all">
+                <Link href="about" className="flex items-center text-xl hover:text-2xl transition-all">
                   About
-                </a>
+                </Link>
               </li>
               <li className="flex items-center p-1 text-sm text-gray-200">
-                <a href="contact" className="flex items-center text-xl hover:text-2xl transition-all ">
+                <Link href="contact" className="flex items-center text-xl hover:text-2xl transition-all ">
                   Contact Us
-                </a>
+                </Link>
               </li>
               <li className="flex items-center p-1 text-sm text-gray-200">
-                <a href="support" className="flex items-center text-xl hover:text-2xl transition-all">
+                <Link href="support" className="flex items-center text-xl hover:text-2xl transition-all">
                   Support
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

@@ -2,10 +2,7 @@
 import { NextResponse } from "next/server";
 import dbConnect from "@/lib/dbConnect";
 
-type Data = {
-  message: string;
-  connected: boolean;
-};
+
 
 export async function GET() {
   try {

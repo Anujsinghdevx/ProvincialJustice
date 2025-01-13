@@ -7,7 +7,7 @@ const page = () => {
   <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">Support</h1>
   
   <p className="text-lg text-gray-700 mb-6">
-    At *Provincial Justice*, we are dedicated to providing you with the best legal resources and user experience. If you need help or have any questions, we're here to support you!
+    At *Provincial Justice*, we are dedicated to providing you with the best legal resources and user experience. If you need help or have any questions, we are here to support you!
   </p>
 
   <div className="bg-gray-100 p-6 rounded-lg shadow-lg">
