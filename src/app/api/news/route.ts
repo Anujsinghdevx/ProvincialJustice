@@ -12,7 +12,7 @@ export async function GET() {
 
     const response = NextResponse.json(results);
     
-    response.headers.set('Access-Control-Allow-Origin', 'https://provincial-justice.vercel.app');  // Replace with your frontend URL
+    response.headers.set('Access-Control-Allow-Origin', 'https://provincial-justice.vercel.app');  
     response.headers.set('Access-Control-Allow-Methods', 'GET, POST');
     response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
