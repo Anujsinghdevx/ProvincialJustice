@@ -1,49 +1,60 @@
+'use client'
+
 import React from 'react'
+import Head from 'next/head'
+import { Mail, Phone, MapPin } from 'lucide-react'
 
-const page = () => {
+const ContactPage = () => {
   return (
-    <div
-    className='font pl-40 h-[80vh] p-8' 
-      style={{
-        background: "linear-gradient(to left, #898989, #656565, #242424)", 
-      }}
-    >
-    
-  <h1 className="text-3xl font-bold text-center text-white mb-6">Contact Us</h1>
-  
-  <p className="text-lg text-justify pr-10 text-white mb-4">
-    We value your feedback and are here to assist you with any inquiries you may have regarding the laws and regulations available on our website.
-    Whether you have questions about specific legal information, need help navigating the site, or have suggestions for improvement, we are eager to hear from you!
-  </p>
+    <>
+      {/* SEO Head */}
+      <Head>
+        <title>Contact Us | Provincial Justice</title>
+        <meta
+          name="description"
+          content="Reach out to Provincial Justice for inquiries, support, or feedback about Indian laws and regulations."
+        />
+      </Head>
 
-  <div className=" pt-8 pb-4 rounded-lg ">
-    <h2 className="text-2xl font-semibold text-white mb-4">How to Reach Us</h2>
+      <div className="min-h-screen bg-gradient-to-r from-[#f7f7f7] to-[#eaeaea] flex flex-col items-center py-16 px-6">
+        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">📞 Contact Us</h1>
+        <p className="text-lg md:text-xl text-gray-600 text-center max-w-2xl mb-10 leading-relaxed">
+          Got a question or feedback? Wer`&apos;`e here to help you with everything related to Indian laws, legal
+          information, and navigating our platform.
+        </p>
 
-    <ul className="space-y-2 text-lg text-white">
-      <li>
-        <strong>Email:</strong> <a href="mailto:support@provincialjustice.com" className="text-blue-600 hover:underline">support@provincialjustice.com</a>
-      </li>
-      <li>
-        <strong>Phone:</strong> +91-123-456-7890
-      </li>
-      <li>
-        <strong>Address:</strong>  
-        <address>
-          Provincial Justice Pvt. Ltd.<br />
-          123 Legal Avenue,<br />
-          New Delhi, India
-        </address>
-      </li>
-    </ul>
+        <div className="w-full max-w-3xl bg-white rounded-3xl shadow-lg p-8 md:p-12 space-y-6">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-4">Reach Us At</h2>
 
+          <div className="space-y-4 text-gray-700 text-lg">
+            <div className="flex items-center gap-4">
+              <Mail size={26} className="text-blue-600" />
+              <a
+                href="mailto:support@provincialjustice.com"
+                className="hover:text-blue-700 transition"
+              >
+                support@provincialjustice.com
+              </a>
+            </div>
 
-    
-  </div>
+            <div className="flex items-center gap-4">
+              <Phone size={26} className="text-green-600" />
+              <span>+91-123-456-7890</span>
+            </div>
 
-
-      
-    </div>
+            <div className="flex items-start gap-4">
+              <MapPin size={26} className="text-red-600 mt-1" />
+              <address className="not-italic">
+                Provincial Justice Pvt. Ltd.<br />
+                123 Legal Avenue,<br />
+                New Delhi, India
+              </address>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   )
 }
 
-export default page
+export default ContactPage

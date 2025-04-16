@@ -1,6 +1,7 @@
 'use client';
-import Image from 'next/image';
 import { useState, useEffect } from 'react';
+import Head from 'next/head';
+import { Search, Newspaper, Gavel, AlertTriangle, ShieldCheck, Scale } from 'lucide-react';
 import '@/app/globals.css';
 
 interface LawData {
@@ -25,16 +26,13 @@ const Home = () => {
     const fetchNews = async () => {
       try {
         const response = await fetch('/api/news');
-        if (!response.ok) {
-          throw new Error('Failed to fetch news');
-        }
+        if (!response.ok) throw new Error('Failed to fetch news');
         const data = await response.json();
         setNews(data);
-      } catch (error) {
-        console.error('Failed to fetch news:', error);
+      } catch (err) {
+        console.error('News fetch error:', err);
       }
     };
-
     fetchNews();
   }, []);
 
@@ -50,14 +48,12 @@ const Home = () => {
 
     try {
       const response = await fetch(`/api/search?query=${searchQuery}`);
-      if (!response.ok) {
-        throw new Error('Failed to fetch data');
-      }
+      if (!response.ok) throw new Error('Failed to fetch data');
       const data = await response.json();
       setResults(data);
-    } catch (error) {
-      console.error('Fetch error:', error);
-      setError('An error occurred while fetching the data.');
+    } catch (err) {
+      console.error('Fetch error:', err);
+      setError('An error occurred while fetching data.');
     } finally {
       setLoading(false);
     }
@@ -65,131 +61,142 @@ const Home = () => {
 
   return (
     <>
-      <div className="font container mx-auto h-[80vh] p-4" style={{ background: '#fcfaf6' }}>
-        <h1 className="text-2xl font-bold text-center mb-4 pt-28">Search for laws</h1>
+      <Head>
+        <title>Law Search Portal | Provincial Justice</title>
+        <meta name="description" content="Search Indian legal sections, punishments, and latest law-related news." />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
 
-        <form onSubmit={handleSearch} className="flex justify-center mb-4 pb-10">
-          <div className="relative w-2/3">
-            <Image
-              src="/search.png"
-              alt="Search"
-              width={24}
-              height={24}
-              className="absolute left-2 top-1/2 transform -translate-y-1/2"
-            />
+      <header className="bg-[#fcfaf6] py-24 text-center">
+        <div className="flex justify-center items-center gap-4 mb-4">
+          <Gavel size={36} className="text-gray-800" />
+          <h1 className="text-4xl font-extrabold text-gray-900">
+            Search for Indian Laws
+          </h1>
+          <Scale size={36} className="text-gray-800" />
+        </div>
+        <p className="text-gray-600 text-lg mt-2 flex justify-center items-center gap-2">
+          <Search size={20} className="text-gray-600" />
+          Find details about crimes, sections, and punishments
+        </p>
+      </header>
+
+      <main className="bg-[#fcfaf6] px-4 py-8 ">
+        <form onSubmit={handleSearch} className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-10">
+          <div className="relative w-full sm:w-2/3 md:w-1/2">
+            <Search className="absolute left-3 top-3 text-gray-400" size={20} />
             <input
               type="text"
               placeholder="Search for laws..."
-              className="p-2 pl-10 border w-full rounded-2xl"
+              className="p-3 pl-10 border w-full rounded-xl focus:ring-2 focus:ring-blue-400"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
-          <button type="submit" className="ml-2 p-2 bg-blue-500 text-white rounded-2xl">
-            Search
+          <button
+            type="submit"
+            className="flex items-center gap-2 p-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition"
+          >
+            <ShieldCheck size={20} /> Search
           </button>
         </form>
 
-        {loading && <p className="pl-20 pt-20">Loading...</p>}
-        {error && <p className="text-red-500 pl-20">{error}</p>}
+        {loading && <p className="text-center text-lg font-medium">Loading...</p>}
+        {error && <p className="text-center text-red-500 font-medium">{error}</p>}
 
         {results.length > 0 && (
-          <div className="pl-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {results.map((law, index) => (
               <div
                 key={index}
-                className="max-w-sm rounded overflow-hidden shadow-lg p-4 bg-white border-2 border-gray-500"
+                className="rounded-lg overflow-hidden border border-gray-300 bg-white p-5 shadow hover:shadow-md transition"
               >
-                <h3 className="text-xl font-semibold text-gray-800">{law.title}</h3>
-                <p className="text-sm text-gray-600 mt-2">
-                  <strong>Explanation:</strong> {law.Explanation}
-                </p>
-                <p className="text-sm text-gray-600 mt-2">
-                  <strong>Punishment:</strong> {law.Punishment}
-                </p>
-                <p className="text-sm text-gray-600 mt-2">
-                  <strong>BNS Section:</strong> {law.BNSSection}
-                </p>
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">{law.title}</h3>
+                <p className="text-sm text-gray-600"><strong>Explanation:</strong> {law.Explanation}</p>
+                <p className="text-sm text-gray-600 mt-1"><strong>Punishment:</strong> {law.Punishment}</p>
+                <p className="text-sm text-gray-600 mt-1"><strong>BNS Section:</strong> {law.BNSSection}</p>
               </div>
             ))}
           </div>
         )}
-      </div>
+      </main>
 
-      <div className="bg-gray-500 h-1 opacity-90"></div>
+      <div className="bg-gray-400 h-[2px] opacity-70 my-6"></div>
 
-      <div
-        className="font flex h-[80vh]"
-        style={{
-          background: 'linear-gradient(to top, #808080, #D6D6D6)',
-        }}
-      >
-        <div className="p-2 w-[30vw] border rounded-xl border-black">
-          <h1 className="flex justify-center mt-16 text-3xl">Latest News</h1>
-          <div className="p-4 h-[60vh] overflow-y-auto">
-            <ul className="space-y-4">
-              {news.map((item, index) => (
-                <li
-                  key={index}
-                  className="p-4 bg-gray-100 rounded-lg shadow-md hover:bg-gray-200"
-                >
-                  <h3 className="text-xl font-semibold">{item.title}</h3>
-                </li>
-              ))}
-            </ul>
+      <section className="bg-gradient-to-t from-gray-600 to-gray-200 py-10 px-4">
+        <div className="flex flex-col lg:flex-row gap-6">
+
+          {/* Latest News */}
+          <div className="w-full lg:w-1/3 border rounded-xl border-black p-5 bg-white bg-opacity-90">
+            <h1 className="flex justify-center items-center gap-2 text-2xl font-semibold mb-4">
+              <Newspaper /> Latest News
+            </h1>
+            <div className="p-2 max-h-[60vh] overflow-y-auto space-y-3">
+              {news.length > 0 ? (
+                news.map((item, index) => (
+                  <div key={index} className="p-3 bg-gray-100 rounded-lg shadow hover:bg-gray-200 transition">
+                    <h3 className="text-base font-medium">{item.title}</h3>
+                  </div>
+                ))
+              ) : (
+                <p className="text-center text-gray-600">No news available.</p>
+              )}
+            </div>
           </div>
-        </div>
 
-        <div className="font pl-4 flex flex-col items-center h-[80vh]">
-          <h1 className="text-5xl p-7 text-center mt-16">Most Common Crimes</h1>
-
-          <div className="flex gap-8 justify-center">
-            <div className="w-80 px-2 h-80 border-4 border-black rounded-2xl bg-gray-300 bg-opacity-80 shadow-lg transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-black">
-              <h2 className="text-2xl text-center">Human Trafficking</h2>
-              <h5 className="text-lg">
-                <u>Explanation</u> - Trafficking humans for the purpose of illegally removing and
-                selling their organs
-              </h5>
-              <h5 className="text-lg">
-                <u>BNS Section</u> - 370-372
-              </h5>
-              <h5 className="text-lg">
-                <u>Punishment</u> - Imprisonment up to 10 years and a fine
-              </h5>
-            </div>
-            <div className="w-80 px-2 h-80 border-4 border-black rounded-2xl bg-gray-300 bg-opacity-80 shadow-lg transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-black">
-              <h2 className="text-2xl text-center">Corruption</h2>
-              <h5 className="text-lg">
-                <u>Explanation</u> - Misusing power for personal benefit, especially by government
-                officials
-              </h5>
-              <h5 className="text-lg">
-                <u>BNS Section</u> - 166-169
-              </h5>
-              <h5 className="text-lg">
-                <u>Punishment</u> - Imprisonment up to 5 years and a fine
-              </h5>
-            </div>
-            <div className="w-80 px-2 h-80 border-4 border-black rounded-2xl bg-gray-300 bg-opacity-80 shadow-lg transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl hover:shadow-black">
-              <h2 className="text-2xl text-center">Murder</h2>
-              <h5 className="text-lg">
-                <u>Explanation</u> - The killing of one person by another that is not legally
-                justified or executable
-              </h5>
-              <h5 className="text-lg">
-                <u>BNS Section</u> - 302
-              </h5>
-              <h5 className="text-lg">
-                <u>Punishment</u> - Life imprisonment or death
-              </h5>
+          {/* Most Common Crimes */}
+          <div className="flex-1 p-4 bg-white bg-opacity-90 rounded-xl border border-black">
+            <h1 className="text-2xl md:text-3xl font-bold text-center mb-6">⚖️ Most Common Crimes</h1>
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+              <CrimeCard
+                title="Human Trafficking"
+                explanation="Trafficking humans for illegal removal and sale of organs."
+                section="370-372"
+                punishment="Up to 10 years imprisonment and fine"
+                icon={<AlertTriangle size={32} />}
+              />
+              <CrimeCard
+                title="Corruption"
+                explanation="Misusing power for personal benefit, especially by officials."
+                section="166-169"
+                punishment="Up to 5 years imprisonment and fine"
+                icon={<Gavel size={32} />}
+              />
+              <CrimeCard
+                title="Murder"
+                explanation="Unlawful killing of one person by another."
+                section="302"
+                punishment="Life imprisonment or death"
+                icon={<ShieldCheck size={32} />}
+              />
             </div>
           </div>
         </div>
-      </div>
+      </section>
+
     </>
   );
 };
 
+interface CrimeCardProps {
+  title: string;
+  explanation: string;
+  section: string;
+  punishment: string;
+  icon: React.ReactNode;
+}
+
+const CrimeCard = ({ title, explanation, section, punishment, icon }: CrimeCardProps) => (
+  <div className="w-full max-w-xs mx-auto p-6 border-4 border-black rounded-2xl bg-gray-300 bg-opacity-90 shadow-lg hover:scale-105 transition">
+    <div className="flex justify-center mb-2 text-gray-700">{icon}</div>
+    <h2 className="text-2xl text-center font-semibold">{title}</h2>
+    <p className="text-sm mt-2"><strong>Explanation:</strong> {explanation}</p>
+    <p className="text-sm mt-1"><strong>BNS Section:</strong> {section}</p>
+    <p className="text-sm mt-1"><strong>Punishment:</strong> {punishment}</p>
+  </div>
+);
+
 export default Home;
+
 
 
