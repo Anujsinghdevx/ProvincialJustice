@@ -1,36 +1,125 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Provincial Justice
 
-## Getting Started
+Provincial Justice is a web application designed to provide users with easy access to Indian laws. It features search option, allowing users to explore criminal laws and their respective provinces efficiently.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Search Functionality:** Quickly find laws by keywords.
+- **User-Friendly Interface:** Clean and intuitive design for effortless navigation.
+
+## Technologies Used
+
+- **Frontend:**
+  - Next.js (latest version)
+  - Typescript
+  - Tailwind CSS
+
+- **Backend:**
+  - Node.js
+
+- **Database:**
+  - MongoDB (using MongoDB Compass for database management)
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Anuj-0-3/ProvincialJustice
+   ```
+
+2. Navigate to the project directory:
+   ```bash
+   cd provincial-justice
+   ```
+
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+4. Set up MongoDB Atlas:
+   - Ensure MongoDB Atlas connection.
+   - Create a database named `data`.
+   - Insert data into a collection named `laws`.
+
+5. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+6. Open your browser and navigate to:
+   ```
+   http://localhost:3000
+   ```
+
+## Folder Structure
+
+```
+provincial-justice/
+├── .next/                # Build output (auto-generated)
+├── node_modules/         # Dependencies (auto-generated)
+├── public/               # Static assets
+├── src/                  # Source code
+│   ├── app/              # Application pages
+│   │   ├── about/        # About page
+│   │   ├── api/          # API routes
+│   │   ├── contact/      # Contact page
+│   │   ├── privacy/      # Privacy policy page
+│   │   ├── support/      # Support page
+│   │   ├── globals.css   # Global styles
+│   │   ├── layout.tsx    # Layout component
+│   │   └── page.tsx      # Main page
+│   ├── components/       # Reusable UI components
+│   │   ├── Footer.tsx    # Footer component
+│   │   └── Navbar.tsx    # Navbar component
+│   └── lib/              # Utility functions
+│       └── dbConnect.ts  # MongoDB connection utility
+├── .env                  # Environment variables
+├── .gitignore            # Git ignore rules
+├── eslint.config.mjs     # ESLint configuration
+├── next-env.d.ts         # Next.js environment types
+├── next.config.ts        # Next.js configuration
+├── package-lock.json     # Dependency lockfile
+├── package.json          # Project dependencies and scripts
+├── postcss.config.js     # PostCSS configuration
+├── README.md             # Project documentation
+├── tailwind.config.js    # Tailwind CSS configuration
+└── tsconfig.json         # TypeScript configuration
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Future Enhancements
 
-## Learn More
+- Add user authentication for personalized experiences.
+- Include additional legal categories beyond criminal laws.
+- Integrate advanced analytics to track user interactions.
+- Responsive Design: Fully optimized for both desktop and mobile devices.
+-Filter Options: Narrow down results based on specific provinces or categories.
 
-To learn more about Next.js, take a look at the following resources:
+## Contributing
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Contributions are welcome! Please follow these steps:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Fork the repository.
+2. Create a new branch for your feature/bug fix:
+   ```bash
+   git checkout -b feature-name
+   ```
+3. Commit your changes:
+   ```bash
+   git commit -m "Add feature-name"
+   ```
+4. Push to your branch:
+   ```bash
+   git push origin feature-name
+   ```
+5. Open a pull request.
 
-## Deploy on Vercel
+## Contact
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+For questions or feedback, please contact:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **GitHub:** https://github.com/Anuj-0-3
+
