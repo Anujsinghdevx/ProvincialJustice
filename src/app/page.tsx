@@ -1,7 +1,9 @@
 'use client';
+
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { Search, Newspaper, Gavel, AlertTriangle, ShieldCheck, Scale } from 'lucide-react';
+import { motion } from 'framer-motion';
 import '@/app/globals.css';
 
 interface LawData {
@@ -67,22 +69,28 @@ const Home = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <header className="bg-[#fcfaf6] py-24 text-center">
-        <div className="flex justify-center items-center gap-4 mb-4">
-          <Gavel size={36} className="text-gray-800" />
-          <h1 className="text-4xl font-extrabold text-gray-900">
+      <header className="bg-gradient-to-r from-[#f7f7f7] to-[#eaeaea] py-24 text-center">
+        <div className="flex justify-center items-center md:gap-4 gap-0 mb-0 md:mb-4">
+          <Gavel size={36} className="text-gray-800 hidden md:block" />
+          <h1 className="text-2xl md:text-4xl font-extrabold text-gray-900">
             Search for Indian Laws
           </h1>
-          <Scale size={36} className="text-gray-800" />
+          <Scale size={36} className="text-gray-800 hidden md:block" />
         </div>
-        <p className="text-gray-600 text-lg mt-2 flex justify-center items-center gap-2">
-          <Search size={20} className="text-gray-600" />
+        <p className="text-gray-600 text-sm md:text-lg mt-2 flex justify-center items-center gap-2">
+          <Search size={20} className="text-gray-600 hidden md:block" />
           Find details about crimes, sections, and punishments
         </p>
       </header>
 
-      <main className="bg-[#fcfaf6] px-4 py-8 ">
-        <form onSubmit={handleSearch} className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-10">
+      <main className="bg-[#f7f7f7] px-4 py-8">
+        <motion.form
+          onSubmit={handleSearch}
+          className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-10"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+        >
           <div className="relative w-full sm:w-2/3 md:w-1/2">
             <Search className="absolute left-3 top-3 text-gray-400" size={20} />
             <input
@@ -99,25 +107,36 @@ const Home = () => {
           >
             <ShieldCheck size={20} /> Search
           </button>
-        </form>
+        </motion.form>
 
         {loading && <p className="text-center text-lg font-medium">Loading...</p>}
         {error && <p className="text-center text-red-500 font-medium">{error}</p>}
 
         {results.length > 0 && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+          >
             {results.map((law, index) => (
               <div
                 key={index}
-                className="rounded-lg overflow-hidden border border-gray-300 bg-white p-5 shadow hover:shadow-md transition"
+                className="rounded-lg overflow-hidden border border-gray-300 bg-white p-5 shadow hover:shadow-md transition transform hover:scale-105"
               >
                 <h3 className="text-xl font-semibold text-gray-800 mb-2">{law.title}</h3>
-                <p className="text-sm text-gray-600"><strong>Explanation:</strong> {law.Explanation}</p>
-                <p className="text-sm text-gray-600 mt-1"><strong>Punishment:</strong> {law.Punishment}</p>
-                <p className="text-sm text-gray-600 mt-1"><strong>BNS Section:</strong> {law.BNSSection}</p>
+                <p className="text-sm text-gray-600">
+                  <strong>Explanation:</strong> {law.Explanation}
+                </p>
+                <p className="text-sm text-gray-600 mt-1">
+                  <strong>Punishment:</strong> {law.Punishment}
+                </p>
+                <p className="text-sm text-gray-600 mt-1">
+                  <strong>BNS Section:</strong> {law.BNSSection}
+                </p>
               </div>
             ))}
-          </div>
+          </motion.div>
         )}
       </main>
 

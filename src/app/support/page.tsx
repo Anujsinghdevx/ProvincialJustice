@@ -1,38 +1,100 @@
-import React from 'react'
+'use client';
 
-const page = () => {
+import React, { useState } from 'react';
+import { MailSearch, HelpCircle, AlertCircle, UserCheck } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+
+const faqs = [
+  {
+    id: 1,
+    question: 'How do I use the search feature?',
+    answer:
+      'Simply type the law or keyword in the search bar at the top. You can also filter results by jurisdiction or law type.',
+    icon: MailSearch,
+  },
+  {
+    id: 2,
+    question: 'How can I get legal assistance?',
+    answer:
+      'We recommend consulting with a licensed attorney. You can find professionals in your area through our trusted network.',
+    icon: UserCheck,
+  },
+  {
+    id: 3,
+    question: 'How do I report an error in the law database?',
+    answer:
+      'If you find outdated or incorrect information, please contact us. We review and update laws regularly to ensure accuracy.',
+    icon: AlertCircle,
+  },
+];
+
+const SupportPage = () => {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const toggleFAQ = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
   return (
-    <div className='font h-[80vh]'>
-      <section className="max-w-4xl mx-auto p-6">
-  <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">Support</h1>
-  
-  <p className="text-lg text-gray-700 mb-6">
-    At *Provincial Justice*, we are dedicated to providing you with the best legal resources and user experience. If you need help or have any questions, we are here to support you!
-  </p>
+    <main className="bg-white text-gray-900 font-sans min-h-screen px-4 sm:px-6 lg:px-8 py-12">
+      <section className="max-w-5xl mx-auto">
+        <h1 className="text-4xl font-bold text-center mb-6">Support</h1>
+        <p className="text-center text-lg text-gray-700 max-w-3xl mx-auto mb-10">
+          At <strong>Provincial Justice</strong>, we’re committed to helping you navigate the legal world with ease. Have questions? We’ve got answers!
+        </p>
 
-  <div className="bg-gray-100 p-6 rounded-lg shadow-lg">
-    <h2 className="text-2xl font-semibold text-gray-800 mb-4">Frequently Asked Questions (FAQ)</h2>
+        <div className="bg-gray-50 p-6 sm:p-8 rounded-xl shadow-lg transition-all duration-300">
+          <h2 className="text-2xl font-semibold mb-6 flex items-center gap-2">
+            <HelpCircle className="w-6 h-6 text-blue-600" />
+            Frequently Asked Questions (FAQ)
+          </h2>
 
-    <div className="space-y-6 text-lg text-gray-700">
-      <div>
-        <h3 className="font-semibold">1. How do I use the search feature?</h3>
-        <p>Simply type the law or keyword you are looking for in the search bar at the top of the website. You can also filter the results by jurisdiction or law type.</p>
-      </div>
-      <div>
-        <h3 className="font-semibold">2. How can I get legal assistance?</h3>
-        <p>If you need specific legal advice, we recommend consulting with a licensed attorney. You can find legal professionals in your area through our network of partners.</p>
-      </div>
-      <div>
-        <h3 className="font-semibold">3. How do I report an error in the law database?</h3>
-        <p>If you find an error or outdated information, please contact us immediately. We review and update the laws regularly to ensure accuracy.</p>
-      </div>
-    </div>
-  </div>
+          <div className="space-y-4">
+            {faqs.map(({ id, question, answer, icon: Icon }, index) => {
+              const isOpen = openIndex === index;
 
-</section>
+              return (
+                <motion.div
+                  key={id}
+                  layout
+                  initial={false}
+                  transition={{ layout: { duration: 0.3, ease: 'easeInOut' } }}
+                  className="border border-gray-200 rounded-lg overflow-hidden"
+                >
+                  <button
+                    onClick={() => toggleFAQ(index)}
+                    className="w-full flex items-center justify-between px-4 py-3 text-left hover:bg-gray-100 transition-colors"
+                    aria-expanded={isOpen}
+                  >
+                    <div className="flex items-center gap-3 text-lg font-medium">
+                      <Icon className="text-indigo-600 w-5 h-5 flex-shrink-0" />
+                      {question}
+                    </div>
+                    <span className="text-indigo-500 font-bold text-xl">{isOpen ? '-' : '+'}</span>
+                  </button>
 
-    </div>
-  )
-}
+                  <AnimatePresence>
+                    {isOpen && (
+                      <motion.div
+                        key="content"
+                        initial={{ opacity: 0, scaleY: 0.95 }}
+                        animate={{ opacity: 1, scaleY: 1 }}
+                        exit={{ opacity: 0, scaleY: 0.95 }}
+                        transition={{ duration: 0.2 }}
+                        className="px-4 pb-4 text-gray-700 text-base origin-top"
+                      >
+                        {answer}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+};
 
-export default page
+export default SupportPage;

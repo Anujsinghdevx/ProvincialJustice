@@ -9,12 +9,12 @@ const Navbar = () => {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <nav className="block w-full px-10 bg-black shadow-md text-white" role="navigation" aria-label="Main Navigation">
+    <nav className="block w-full px-0 md:px-10  bg-black shadow-md text-white" role="navigation" aria-label="Main Navigation">
       <div className="container mx-auto flex flex-wrap items-center justify-between px-4 py-3">
         {/* Logo */}
         <Link href="/" className="flex items-center" aria-label="Go to homepage">
           <Image src="/logo.png" height={60} width={60} alt="Website Logo" priority />
-          <span className="ml-2 text-xl font-bold text-gray-100">Provincial Justice</span>
+          <span className="ml-2 text-xl md:text-3xl font-bold text-gray-100">Provincial Justice</span>
         </Link>
 
         {/* Desktop Menu */}
