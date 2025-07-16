@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
-import { Search, Newspaper, Gavel, AlertTriangle, ShieldCheck, Scale } from 'lucide-react';
+import { Search, Newspaper, Gavel, AlertTriangle, ShieldCheck } from 'lucide-react';
 import { motion } from 'framer-motion';
 import '@/app/globals.css';
 
