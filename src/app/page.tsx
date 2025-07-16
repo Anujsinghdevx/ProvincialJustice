@@ -69,45 +69,50 @@ const Home = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <header className="bg-gradient-to-r from-[#f7f7f7] to-[#eaeaea] py-24 text-center">
-        <div className="flex justify-center items-center md:gap-4 gap-0 mb-0 md:mb-4">
-          <Gavel size={36} className="text-gray-800 hidden md:block" />
-          <h1 className="text-2xl md:text-4xl font-extrabold text-gray-900">
+      <header className="bg-gradient-to-br from-white to-gray-100 py-28 text-center shadow-inner">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="flex justify-center items-center md:gap-6 gap-3"
+        >
+          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">
             Search for Indian Laws
           </h1>
-          <Scale size={36} className="text-gray-800 hidden md:block" />
-        </div>
-        <p className="text-gray-600 text-sm md:text-lg mt-2 flex justify-center items-center gap-2">
-          <Search size={20} className="text-gray-600 hidden md:block" />
+        </motion.div>
+        <p className="text-gray-600 text-md md:text-xl mt-4 flex justify-center items-center gap-2">
+          <Search size={22} className="text-gray-500 hidden md:block" />
           Find details about crimes, sections, and punishments
         </p>
       </header>
 
+
       <main className="bg-[#f7f7f7] px-4 py-8">
         <motion.form
           onSubmit={handleSearch}
-          className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-10"
+          className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-12"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="relative w-full sm:w-2/3 md:w-1/2">
+          <div className="relative w-full sm:w-2/3 md:w-1/2 shadow-md">
             <Search className="absolute left-3 top-3 text-gray-400" size={20} />
             <input
               type="text"
               placeholder="Search for laws..."
-              className="p-3 pl-10 border w-full rounded-xl focus:ring-2 focus:ring-blue-400"
+              className="p-3 pl-10 w-full rounded-full border-2 border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none transition"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
           <button
             type="submit"
-            className="flex items-center gap-2 p-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition"
+            className="flex items-center gap-2 px-5 py-3 bg-blue-600 text-white rounded-full shadow hover:bg-blue-700 transition"
           >
-            <ShieldCheck size={20} /> Search
+            Search
           </button>
         </motion.form>
+
 
         {loading && <p className="text-center text-lg font-medium">Loading...</p>}
         {error && <p className="text-center text-red-500 font-medium">{error}</p>}
@@ -206,7 +211,7 @@ interface CrimeCardProps {
 }
 
 const CrimeCard = ({ title, explanation, section, punishment, icon }: CrimeCardProps) => (
-  <div className="w-full max-w-xs mx-auto p-6 border-4 border-black rounded-2xl bg-gray-300 bg-opacity-90 shadow-lg hover:scale-105 transition">
+  <div className="w-full max-w-xs mx-auto p-6 border border-gray-400 rounded-2xl bg-white shadow-md hover:shadow-lg hover:scale-105 transition duration-300">
     <div className="flex justify-center mb-2 text-gray-700">{icon}</div>
     <h2 className="text-2xl text-center font-semibold">{title}</h2>
     <p className="text-sm mt-2"><strong>Explanation:</strong> {explanation}</p>

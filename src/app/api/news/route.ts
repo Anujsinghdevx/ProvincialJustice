@@ -8,7 +8,6 @@ export async function GET() {
     const collection = db.collection("news");
 
     const results = await collection.find().toArray();
-    console.log(results);
 
     const response = NextResponse.json(results);
     
