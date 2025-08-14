@@ -11,7 +11,7 @@ const contactItems = [
     label: 'Email',
     value: 'support@provincial.com',
     href: 'mailto:support@provincial.com',
-    color: 'bg-blue-100 text-blue-600',
+    color: 'bg-indigo-100 text-indigo-600',
   },
   {
     icon: Phone,
@@ -31,7 +31,7 @@ const contactItems = [
       </>
     ),
     href: null,
-    color: 'bg-red-100 text-red-600',
+    color: 'bg-pink-100 text-pink-600',
   },
 ];
 
@@ -46,49 +46,57 @@ const ContactPage = () => {
         />
       </Head>
 
-      <main className="min-h-screen bg-gradient-to-br from-[#f7f7f7] to-[#eaeaea] flex flex-col items-center py-16 px-6">
+      <main className="min-h-screen bg-gray-50 flex flex-col items-center py-16 px-6">
+        {/* Title */}
         <motion.h1
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: -15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-bold text-gray-900 mb-4"
+          transition={{ duration: 0.5 }}
+          className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 text-center flex items-center"
         >
-          📞 Contact Us
+          <Phone className="mr-2 mt-2 h-6 w-6 sm:h-8 sm:w-8" /> Contact Us
         </motion.h1>
 
+        {/* Subtitle */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          className="text-lg md:text-xl text-gray-600 text-center max-w-2xl mb-10 leading-relaxed"
+          transition={{ delay: 0.2, duration: 0.5 }}
+          className="text-lg md:text-xl text-gray-600 text-center max-w-2xl mb-12 leading-relaxed"
         >
-          Got a question or feedback? We&apos;re here to help you with everything related to Indian laws, legal
+          Got a question or feedback? We’re here to help you with everything related to Indian laws, legal
           information, and navigating our platform.
         </motion.p>
 
+        {/* Contact Info Box */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.6 }}
-          className="w-full max-w-3xl bg-white rounded-3xl shadow-xl p-8 md:p-12 space-y-8"
+          transition={{ delay: 0.4, duration: 0.5 }}
+          className="w-full max-w-3xl bg-white rounded-3xl shadow-md p-8 md:p-12 space-y-8 border border-gray-100"
         >
-          <h2 className="text-2xl font-semibold text-gray-800 mb-2">Reach Us At</h2>
+          <h2 className="text-2xl font-semibold text-gray-800">Reach Us At</h2>
 
           <div className="space-y-6">
             {contactItems.map(({ icon: Icon, label, value, href, color }, idx) => (
-              <div key={idx} className="flex items-start gap-4 group">
+              <div
+                key={idx}
+                className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition group shadow-sm"
+              >
+                {/* Icon */}
                 <div
-                  className={`p-3 rounded-xl ${color} transition transform group-hover:scale-105`}
+                  className={`p-3 rounded-xl ${color} flex items-center justify-center transition transform group-hover:scale-105`}
                 >
                   <Icon className="w-6 h-6" />
                 </div>
 
-                <div className="text-gray-700 text-sm md:text-lg">
-                  <div className="font-semibold">{label}</div>
+                {/* Text */}
+                <div className="flex-1 text-gray-700 text-sm md:text-lg">
+                  <div className="font-semibold text-gray-900">{label}</div>
                   {href ? (
                     <a
                       href={href}
-                      className="hover:underline text-blue-600 hover:text-blue-800 transition"
+                      className="hover:underline text-indigo-600 hover:text-indigo-800 transition break-all"
                     >
                       {value}
                     </a>
